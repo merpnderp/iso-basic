@@ -48,6 +48,7 @@
 
 	var React = __webpack_require__(1);
 	var render = __webpack_require__(38).render;
+	var match = __webpack_require__(168).match;
 	var Router = __webpack_require__(168).Router;
 	var Provider = __webpack_require__(230).Provider;
 	var browserHistory = __webpack_require__(168).browserHistory;
@@ -57,11 +58,13 @@
 	var initialState = window.__INITIAL_STATE__;
 	var store = __webpack_require__(253)(initialState);
 
-	render(React.createElement(
-	    Provider,
-	    { store: store },
-	    React.createElement(Router, { children: routes, history: browserHistory })
-	), document.getElementById('react-view'));
+	match({ history: history, routes: routes }, function (error, redirectionLocation, renderProps) {
+	    render(React.createElement(
+	        Provider,
+	        { store: store },
+	        React.createElement(Router, renderProps)
+	    ), document.getElementById('react-view'));
+	});
 
 /***/ },
 /* 1 */
