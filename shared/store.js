@@ -1,6 +1,6 @@
 const redux = require('redux');
 const thunk = require('redux-thunk').default;
-const mainReducers = require('./components/mainReducer.js');
+const reducers = require('./reducers');
 
 const logger = store => next => action => {
     console.log('dispatching', action)
@@ -10,15 +10,15 @@ const logger = store => next => action => {
 }
 
 module.exports = function (data) {
-    var reducers = redux.combineReducers({
-        main: mainReducers
-    });
+    var reducer = redux.combineReducers(reducers);
+
     var finalCreateStore;
+
     if (process.env.NODE_ENV != 'production' ) {
         finalCreateStore = redux.applyMiddleware(logger, thunk)(redux.createStore)
     } else {
         finalCreateStore = redux.applyMiddleware(thunk)(redux.createStore)
     }
-    var store = finalCreateStore(reducers, data)
+    var store = finalCreateStore(reducer, data)
     return store
 }

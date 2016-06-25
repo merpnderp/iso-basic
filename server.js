@@ -10,22 +10,12 @@ const redux = require('redux');
 const thunk = require('redux-thunk');
 const Provider = require('react-redux').Provider;
 const routes = require('./shared/routes');
-const reducers = require('./shared/reducers');
-const storeLogger = require('./shared/utils').storeLogger;
+const store = require('./shared/store')();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req,res)=>{
 //    const location = createLocation(req.url);
-    const reducer  = redux.combineReducers(reducers);
-    let store;
-
-    if (process.env.NODE_ENV != 'production') {
-        //store = redux.applyMiddleware(storeLogger, thunk)(redux.createStore)(reducer);
-        store = redux.createStore(reducer);
-    }else{
-        store = redux.applyMiddleware(thunk)(redux.createStore)(reducer);
-    }
 
     router.match({routes,location: req.url},(err, redirectLocation, renderProps) => {
         if(err) {
