@@ -1,19 +1,33 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+
 const React = require('react');
-const match = require('react-router').match;
+const router = require('react-router');
 const RouterContext = require('react-router').RouterContext;
 const renderToString = require('react-dom/server').renderToString;
+const redux = require('redux');
+const thunk = require('redux-thunk');
+const Provider = require('react-redux').Provider;
 const routes = require('./shared/routes');
+const reducers = require('./shared/reducers');
+const storeLogger = require('./shared/utils').storeLogger;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req,res)=>{
 //    const location = createLocation(req.url);
-//    const reducer  = combineReducers(reducers);
-//    const store    = applyMiddleware(promiseMiddleware)(createStore)(reducer);
-    match({routes,location: req.url},(err, redirectLocation, renderProps) => {
+    const reducer  = redux.combineReducers(reducers);
+    let store;
+
+    if (process.env.NODE_ENV != 'production') {
+        //store = redux.applyMiddleware(storeLogger, thunk)(redux.createStore)(reducer);
+        store = redux.createStore(reducer);
+    }else{
+        store = redux.applyMiddleware(thunk)(redux.createStore)(reducer);
+    }
+
+    router.match({routes,location: req.url},(err, redirectLocation, renderProps) => {
         if(err) {
             console.error(err);
             return res.status(500).end('Internal server error');
@@ -24,13 +38,14 @@ app.use((req,res)=>{
 
         function renderView() {
             const InitialView = (
+                <Provider store={store}>
                     <RouterContext {...renderProps} />
+                </Provider>
             );
 
             const componentHTML = renderToString(InitialView);
 
-//            const initialState = store.getState();
-            const initialState = {};
+            const initialState = store.getState();
 
             const HTML = `
       <!DOCTYPE html>
@@ -51,6 +66,7 @@ app.use((req,res)=>{
       `;
             return HTML;
         }
+
         console.log("calling render");
         res.end(renderView());
 
