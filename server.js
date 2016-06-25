@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const react = require('react');
+const React = require('react');
 const match = require('react-router').match;
-const RoutingContext = require('react-router').RoutingContext;
+const RouterContext = require('react-router').RouterContext;
 const renderToString = require('react-dom/server').renderToString;
 const routes = require('./shared/routes');
 
@@ -13,7 +13,7 @@ app.use((req,res)=>{
 //    const location = createLocation(req.url);
 //    const reducer  = combineReducers(reducers);
 //    const store    = applyMiddleware(promiseMiddleware)(createStore)(reducer);
-    match({routes,location},(err, redirectLocation, renderProps) => {
+    match({routes,location: req.url},(err, redirectLocation, renderProps) => {
         if(err) {
             console.error(err);
             return res.status(500).end('Internal server error');
@@ -24,7 +24,7 @@ app.use((req,res)=>{
 
         function renderView() {
             const InitialView = (
-                    <RoutingContext {...renderProps} />
+                    <RouterContext {...renderProps} />
             );
 
             const componentHTML = renderToString(InitialView);
@@ -49,14 +49,17 @@ app.use((req,res)=>{
         </body>
       </html>
       `;
-
             return HTML;
         }
+        console.log("calling render");
+        res.end(renderView());
 
+        /*
         fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
             .then(renderView)
             .then(html => res.end(html))
             .catch(err => res.end(err.message));
+         */
     });
 })
 
