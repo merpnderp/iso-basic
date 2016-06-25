@@ -9,6 +9,7 @@
     "start": "webpack-dev-server --colors",
     "build": "webpack -p --optimize-minimize --config webpack.production.config.js",
     "watch": "webpack --debug --watch",
+    "dev" : "npm run watch & npm run devserver",
     "postinstall": "node copyVendor.js"
   },
   "author": "",

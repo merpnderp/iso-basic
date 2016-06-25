@@ -58,7 +58,6 @@ app.use((req,res)=>{
             return HTML;
         }
 
-        console.log("calling render");
         res.end(renderView());
 
         /*

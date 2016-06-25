@@ -27402,7 +27402,8 @@
 	            'h1',
 	            null,
 	            'App'
-	        )
+	        ),
+	        props.children
 	    );
 	};
 
