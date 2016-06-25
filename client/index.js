@@ -2,31 +2,16 @@ const React = require('react');
 const render = require('react-dom').render;
 const Router = require('react-router').Router;
 const Provider = require('react-redux').Provider;
+const browserHistory = require('react-router').browserHistory;
 
+const routes = require('../shared/routes');
 
-import React                from 'react';
-import { render }           from 'react-dom';
-import { Router }           from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-import { Provider }         from 'react-redux';
-import * as reducers        from 'reducers';
-import routes               from 'routes';
-import promiseMiddleware    from 'lib/promiseMiddleware';
-import immutifyState        from 'lib/immutifyState';
-import { createStore,
-    combineReducers,
-    applyMiddleware }  from 'redux';
-
-const initialState = immutifyState(window.__INITIAL_STATE__);
-
-const history = createBrowserHistory();
-
-const reducer = combineReducers(reducers);
-const store   = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState);
+const initialState = (window.__INITIAL_STATE__);
+const store = require('../shared/store')(initialState);
 
 render(
     <Provider store={store}>
-        <Router children={routes} history={history} />
+        <Router children={routes} history={browserHistory} />
     </Provider>,
     document.getElementById('react-view')
 );

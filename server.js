@@ -15,6 +15,7 @@ const store = require('./shared/store')();
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req,res)=>{
+
 //    const location = createLocation(req.url);
 
     router.match({routes,location: req.url},(err, redirectLocation, renderProps) => {
@@ -50,7 +51,7 @@ app.use((req,res)=>{
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
-          <script type="application/javascript" src="/bundle.js"></script>
+          <script type="application/javascript" src="/app.js"></script>
         </body>
       </html>
       `;

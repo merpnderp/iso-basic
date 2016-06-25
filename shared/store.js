@@ -19,6 +19,5 @@ module.exports = function (data) {
     } else {
         finalCreateStore = redux.applyMiddleware(thunk)(redux.createStore)
     }
-    var store = finalCreateStore(reducer, data)
-    return store
+    return  finalCreateStore(reducer, data)
 }

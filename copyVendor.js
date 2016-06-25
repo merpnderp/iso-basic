@@ -1,3 +1,4 @@
+/*
 var ncp = require('ncp').ncp;
 
 ncp.limit = 16;
@@ -36,3 +37,4 @@ ncp("./node_modules/font-awesome/fonts", "./public/build/font-awesome/fonts",{cl
     }
     console.log('font-awesome fonts copied!');
 });
+*/

@@ -7,8 +7,8 @@ var plugin = new webpack.DefinePlugin({
 
 module.exports = {
     plugins: [plugin],
-    entry: {app:'./src/app.js'},
-    output: {path: __dirname, filename: './public/build/[name].js'},
+    entry: {app:'./client/index.js'},
+    output: {path: __dirname, filename: './public/[name].js'},
     module: {
         loaders: [
             {

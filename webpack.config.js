@@ -1,16 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
-//var WatchIgnorePlugin = require('webpack').WatchIgnorePlugin;
-/*
- plugins: [
- new  WatchIgnorePlugin([
- path.resolve(__dirname, './node_modules/')
- ])
- ],
- */
+
 module.exports = {
-    entry: {app:'./src/app.js'},
-    output: {path: __dirname, filename: path.join('public/build','[name].js')},
+    entry: {app:'./client/index.js'},
+    output: {path: __dirname, filename: path.join('public/','[name].js')},
     module: {
         loaders: [
             {
