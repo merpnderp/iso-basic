@@ -14,3 +14,10 @@ exports.test = function(){
         })
     }
 }
+
+exports.setTest = function(value){
+    return{
+        type:'SetTest',
+        value
+    }
+}

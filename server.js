@@ -10,6 +10,7 @@ const renderToString = require('react-dom/server').renderToString;
 const redux = require('redux');
 const thunk = require('redux-thunk');
 const Provider = require('react-redux').Provider;
+const history = require('history');
 
 const fetchComponentData = require('./shared/utils/fetchComponentData');
 const routes = require('./shared/routes');
@@ -20,14 +21,14 @@ const store = require('./shared/store')();
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/test', (req,res)=>{
-    res.json("It works");
+    res.json("Loaded on server");
 })
 
 app.use('/',(req,res)=>{
 
-//    const location = createLocation(req.url);
+    const location = history.createLocation(req.url);
 
-    router.match({routes,location: req.url},(err, redirectLocation, renderProps) => {
+    router.match({routes,location},(err, redirectLocation, renderProps) => {
         if(err) {
             console.error(err);
             return res.status(500).end('Internal server error');

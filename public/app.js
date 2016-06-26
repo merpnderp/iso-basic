@@ -27862,7 +27862,12 @@
 	    function App(props) {
 	        _classCallCheck(this, App);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+
+	        setTimeout(function () {
+	            _this.props.dispatch(actions.setTest("Loaded on client"));
+	        }, 1000);
+	        return _this;
 	    }
 
 	    _createClass(App, [{
@@ -27913,6 +27918,13 @@
 	        }).catch(function (response) {
 	            console.log(response);
 	        });
+	    };
+	};
+
+	exports.setTest = function (value) {
+	    return {
+	        type: 'SetTest',
+	        value: value
 	    };
 	};
 

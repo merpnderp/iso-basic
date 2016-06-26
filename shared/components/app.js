@@ -12,8 +12,10 @@ class App extends React.Component{
 
     constructor(props){
         super(props);
+        setTimeout(()=>{
+            this.props.dispatch(actions.setTest("Loaded on client"));
+        },1000);
     }
-
 
     render(){
         return(
@@ -24,6 +26,7 @@ class App extends React.Component{
         )
     }
 }
+
 const mapStateToProps = (state/*, props*/) => {
     return {
         test: state.main.test

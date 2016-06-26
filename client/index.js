@@ -17,7 +17,6 @@ match({history: browserHistory, routes}, (error, redirectionLocation, renderProp
             <Router {...renderProps}/>
         </Provider>,
         document.getElementById('react-view')
-
     )
 })
 
