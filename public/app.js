@@ -59,7 +59,7 @@
 	var initialState = window.__INITIAL_STATE__;
 	var store = __webpack_require__(256)(initialState);
 
-	match({ history: history, routes: routes }, function (error, redirectionLocation, renderProps) {
+	match({ history: browserHistory, routes: routes }, function (error, redirectionLocation, renderProps) {
 	    render(React.createElement(
 	        Provider,
 	        { store: store },
@@ -27868,8 +27868,6 @@
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
-	            console.log("------App render");
-	            console.log(this.props.test);
 	            return React.createElement(
 	                'div',
 	                null,
@@ -27908,14 +27906,11 @@
 	        return fetch('http://localhost:3000/test').then(function (response) {
 	            return response.json();
 	        }).then(function (results) {
-	            console.log("axios returned");
-	            console.log(results);
 	            dispatch({
 	                type: 'SetTest',
 	                value: results
 	            });
 	        }).catch(function (response) {
-	            console.log("get test failed");
 	            console.log(response);
 	        });
 	    };
@@ -28032,7 +28027,6 @@
 
 	    switch (action.type) {
 	        case 'SetTest':
-	            console.log("In mainReducer.SetTest");
 	            return update(state, { test: { $set: action.value } });
 	        default:
 	            return state;

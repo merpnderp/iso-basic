@@ -20,8 +20,7 @@ const store = require('./shared/store')();
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/test', (req,res)=>{
-    console.log("WEBAPI return test");
-    res.json("I Rock");
+    res.json("It works");
 })
 
 app.use('/',(req,res)=>{
@@ -38,7 +37,6 @@ app.use('/',(req,res)=>{
             return res.status(404).end('Not found');
 
         function renderView() {
-            console.log('renderView called');
             const InitialView = (
                 <Provider store={store}>
                     <RouterContext {...renderProps} />
@@ -68,8 +66,6 @@ app.use('/',(req,res)=>{
       `;
             return HTML;
         }
-
-//        res.end(renderView());
 
         fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
             .then(renderView)

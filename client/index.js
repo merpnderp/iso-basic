@@ -11,7 +11,7 @@ const routes = require('../shared/routes');
 const initialState = (window.__INITIAL_STATE__);
 const store = require('../shared/store')(initialState);
 
-match({history, routes}, (error, redirectionLocation, renderProps)=>{
+match({history: browserHistory, routes}, (error, redirectionLocation, renderProps)=>{
     render(
         <Provider store={store}>
             <Router {...renderProps}/>

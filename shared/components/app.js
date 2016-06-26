@@ -16,8 +16,6 @@ class App extends React.Component{
 
 
     render(){
-        console.log("------App render");
-        console.log(this.props.test)
         return(
             <div>
                 <h1>App: {this.props.test}</h1>
