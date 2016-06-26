@@ -1,3 +1,4 @@
+require('whatwg-fetch');
 const React = require('react');
 const render = require('react-dom').render;
 const match = require('react-router').match;

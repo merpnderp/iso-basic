@@ -1,12 +1,12 @@
 const update = require('react-addons-update');
 
-let initialState = [];
+let initialState = {test: "foo"};
+
 const mainReducer = function (state = initialState, action) {
     switch (action.type) {
-        case 'setTask':
-            return update(state, {task: {$set: action.value}})
-        case 'setValue':
-            return update(state, {value: {$set: action.value}})
+        case 'SetTest':
+            console.log("In mainReducer.SetTest");
+            return update(state, {test: {$set: action.value}})
         default:
             return state;
     }

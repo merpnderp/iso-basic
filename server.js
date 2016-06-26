@@ -1,3 +1,4 @@
+require('whatwg-fetch');
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -9,12 +10,21 @@ const renderToString = require('react-dom/server').renderToString;
 const redux = require('redux');
 const thunk = require('redux-thunk');
 const Provider = require('react-redux').Provider;
+
+const fetchComponentData = require('./shared/utils/fetchComponentData');
 const routes = require('./shared/routes');
 const store = require('./shared/store')();
 
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req,res)=>{
+app.get('/test', (req,res)=>{
+    console.log("WEBAPI return test");
+    res.json("I Rock");
+})
+
+app.use('/',(req,res)=>{
 
 //    const location = createLocation(req.url);
 
@@ -28,6 +38,7 @@ app.use((req,res)=>{
             return res.status(404).end('Not found');
 
         function renderView() {
+            console.log('renderView called');
             const InitialView = (
                 <Provider store={store}>
                     <RouterContext {...renderProps} />
@@ -58,14 +69,12 @@ app.use((req,res)=>{
             return HTML;
         }
 
-        res.end(renderView());
+//        res.end(renderView());
 
-        /*
         fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
             .then(renderView)
             .then(html => res.end(html))
             .catch(err => res.end(err.message));
-         */
     });
 })
 
