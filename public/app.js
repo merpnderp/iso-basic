@@ -57,7 +57,7 @@
 	var routes = __webpack_require__(251);
 
 	var initialState = window.__INITIAL_STATE__;
-	var store = __webpack_require__(256)(initialState);
+	var store = __webpack_require__(257)(initialState);
 
 	match({ history: browserHistory, routes: routes }, function (error, redirectionLocation, renderProps) {
 	    render(React.createElement(
@@ -27822,11 +27822,12 @@
 	var IndexRoute = __webpack_require__(169).IndexRoute;
 	var App = __webpack_require__(252);
 	var Home = __webpack_require__(255);
-
+	var Foo = __webpack_require__(256);
 	module.exports = React.createElement(
 	    Route,
 	    { name: 'app', component: App, path: '/' },
-	    React.createElement(IndexRoute, { component: Home })
+	    React.createElement(IndexRoute, { component: Home }),
+	    React.createElement(Route, { name: 'Foo', component: Foo, path: '/foo' })
 	);
 
 /***/ },
@@ -27846,7 +27847,7 @@
 	var React = __webpack_require__(2);
 	var actions = __webpack_require__(253);
 	var connect = __webpack_require__(231).connect;
-
+	var Link = __webpack_require__(169).Link;
 	var needs = [actions.test];
 
 	var App = function (_React$Component) {
@@ -27881,6 +27882,32 @@
 	                    null,
 	                    'App: ',
 	                    this.props.test
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'ul',
+	                        null,
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                Link,
+	                                { to: '/' },
+	                                'Home'
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                Link,
+	                                { to: '/foo' },
+	                                'Foo'
+	                            )
+	                        )
+	                    )
 	                ),
 	                this.props.children
 	            );
@@ -27964,11 +27991,31 @@
 /* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var React = __webpack_require__(2);
+
+	module.exports = function (props) {
+	    return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	            'h1',
+	            null,
+	            'Foo'
+	        )
+	    );
+	};
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	var redux = __webpack_require__(238);
-	var thunk = __webpack_require__(257).default;
-	var reducers = __webpack_require__(258);
+	var thunk = __webpack_require__(258).default;
+	var reducers = __webpack_require__(259);
 
 	var logger = function logger(store) {
 	    return function (next) {
@@ -27996,7 +28043,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28024,12 +28071,12 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var update = __webpack_require__(259);
+	var update = __webpack_require__(260);
 
 	var initialState = { test: "foo" };
 
@@ -28050,13 +28097,13 @@
 	};
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(260);
+	module.exports = __webpack_require__(261);
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

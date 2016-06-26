@@ -1,26 +1,36 @@
 const React = require('react');
 const actions = require('../mainActions');
 const connect = require('react-redux').connect;
-
+const Link = require('react-router').Link;
 const needs = [actions.test];
 
-class App extends React.Component{
+class App extends React.Component {
 
-    static get needs(){
+    static get needs() {
         return needs;
     }
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        setTimeout(()=>{
+        setTimeout(()=> {
             this.props.dispatch(actions.setTest("Loaded on client"));
-        },1000);
+        }, 1000);
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <h1>App: {this.props.test}</h1>
+                <div>
+                    <ul>
+                        <li>
+                            <Link to={`/`}>Home</Link>
+                        </li>
+                        <li>
+                            <Link to={`/foo`}>Foo</Link>
+                        </li>
+                    </ul>
+                </div>
                 {this.props.children}
             </div>
         )
