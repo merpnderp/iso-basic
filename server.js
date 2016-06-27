@@ -25,7 +25,8 @@ app.get('/test', (req,res)=>{
 
 app.use('/',(req,res)=>{
 
-    const location = history.createLocation(req.url);
+    //const location = history.createLocation(req.url);
+    const location = req.url;
 
     router.match({routes,location},(err, redirectLocation, renderProps) => {
         if(err) {

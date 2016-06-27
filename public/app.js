@@ -59,7 +59,7 @@
 	var initialState = window.__INITIAL_STATE__;
 	var store = __webpack_require__(257)(initialState);
 
-	match({ history: browserHistory, routes: routes }, function (error, redirectionLocation, renderProps) {
+	match({ routes: routes, history: browserHistory }, function (error, redirectionLocation, renderProps) {
 	    render(React.createElement(
 	        Provider,
 	        { store: store },
