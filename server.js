@@ -61,6 +61,7 @@ app.use('/',(req,res)=>{
         </head>
         <body>
           <div id="react-view">${componentHTML}</div>
+          <script type="application/javascript" src="/bundle.js"></script>
           <script type="application/javascript" src="/app.js"></script>
         </body>
       </html>

@@ -6,10 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "devserver": "nodemon index.js",
-    "start": "webpack-dev-server --colors",
-    "build": "webpack -p --optimize-minimize --config webpack.production.config.js",
-    "watch": "webpack --debug --watch",
-    "dev": "npm run watch & npm run devserver",
+    "wstart": "webpack-dev-server --colors",
+    "wbuild": "webpack -p --optimize-minimize --config webpack.production.config.js",
+    "wwatch": "webpack --debug --watch",
+    "wdev": "npm run watch & npm run devserver",
+    "bundle": "browserify -v -r babel-polyfill -r dotty -r isomorphic-fetch -r react -r react-addons-update -r react-bootstrap -r react-dom -r react-redux -r react-router -r redux -r redux-thunk | uglifyjs -o public/bundle.js",
+    "watch": "watchify -x babel-polyfill -x dotty -x isomorphic-fetch -x react -x react-addons-update -x react-bootstrap -x react-dom -x react-redux -x react-router -x redux -x redux-thunk -v -t [ babelify --presets [ es2015 react ] --plugins [ transform-object-rest-spread ] ] client/index.js -o public/app.js",
+    "dev": "npm run devserver & npm run bundle & npm run watch",
     "postinstall": "node copyVendor.js"
   },
   "author": "",
@@ -36,7 +39,10 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
     "nodemon": "^1.9.2",
+    "uglify-js": "^2.6.4",
     "webpack": "^1.13.1"
   }
 }
